@@ -19,16 +19,12 @@
 
   /* Logo (app icon, with the corner watermark masked for the web) */
   .logo {
-    position: relative; width: 104px; height: 104px; margin: 0 auto 28px;
+    width: 104px; height: 104px; margin: 0 auto 28px;
     border-radius: 24px; overflow: hidden;
-    box-shadow: 0 8px 24px rgba(10,10,10,0.18);
+    border: 1px solid var(--n100);
+    box-shadow: 0 6px 18px rgba(10,10,10,0.08);
   }
   .logo img { width: 100%; height: 100%; display: block; object-fit: cover; }
-  /* Masks the bottom-right generator watermark with the icon's dark backdrop. */
-  .logo .mask {
-    position: absolute; right: 0; bottom: 0; width: 36%; height: 20%;
-    background: radial-gradient(120% 120% at 100% 100%, #15100f 0%, #0c0a0a 70%);
-  }
 
   h1 {
     font-size: 44px; font-weight: 800; letter-spacing: -0.03em; margin: 0 0 10px;
@@ -59,7 +55,6 @@
   <main class="wrap">
     <div class="logo">
       <img src="icon.png" alt="Exerciz app icon" />
-      <div class="mask"></div>
     </div>
 
     <h1>Exerciz</h1>
