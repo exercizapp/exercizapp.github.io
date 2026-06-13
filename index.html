@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Exerciz — Build your routine. Run guided workouts.</title>
+<meta name="description" content="Exerciz is a custom workout-routine builder for iOS: create routines, run guided timed sessions with an on-screen instructor, and track every workout." />
+<style>
+  :root { --ink:#0A0A0A; --soft:#5A5A5A; --line:#E2E2E2; --n100:#F0F0F0; --bg:#FFFFFF; }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .wrap { max-width: 560px; padding: 48px 24px; text-align: center; }
+
+  /* Logo (app icon, with the corner watermark masked for the web) */
+  .logo {
+    position: relative; width: 104px; height: 104px; margin: 0 auto 28px;
+    border-radius: 24px; overflow: hidden;
+    box-shadow: 0 8px 24px rgba(10,10,10,0.18);
+  }
+  .logo img { width: 100%; height: 100%; display: block; object-fit: cover; }
+  /* Masks the bottom-right generator watermark with the icon's dark backdrop. */
+  .logo .mask {
+    position: absolute; right: 0; bottom: 0; width: 36%; height: 20%;
+    background: radial-gradient(120% 120% at 100% 100%, #15100f 0%, #0c0a0a 70%);
+  }
+
+  h1 {
+    font-size: 44px; font-weight: 800; letter-spacing: -0.03em; margin: 0 0 10px;
+  }
+  .tagline { font-size: 18px; color: var(--soft); margin: 0 auto 14px; max-width: 420px; line-height: 1.5; }
+  .blurb { font-size: 15px; color: #1a1a1a; margin: 0 auto 32px; max-width: 460px; line-height: 1.6; }
+
+  .badge {
+    display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--soft);
+    border: 1px solid var(--line); border-radius: 999px; padding: 7px 16px; margin-bottom: 32px;
+  }
+
+  .links { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .links a {
+    text-decoration: none; font-size: 14px; font-weight: 600;
+    padding: 11px 22px; border-radius: 999px; transition: opacity .18s ease;
+  }
+  .links a.primary { background: var(--ink); color: #fff; }
+  .links a.ghost { color: var(--ink); border: 1px solid var(--line); }
+  .links a:hover { opacity: 0.82; }
+
+  .footer { margin-top: 44px; color: #9a9a9a; font-size: 13px; }
+  .footer a { color: var(--soft); text-decoration: none; }
+</style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="logo">
+      <img src="icon.png" alt="Exerciz app icon" />
+      <div class="mask"></div>
+    </div>
+
+    <h1>Exerciz</h1>
+    <p class="tagline">Build your routine. Run guided workouts. Track every session.</p>
+    <p class="blurb">
+      A custom workout-routine builder for iOS. Target the muscle groups you want with bodyweight,
+      free weights, or equipment — then run guided, timed sessions with an on-screen instructor and
+      keep your streaks, minutes, and history in one place.
+    </p>
+
+    <div class="badge">Coming soon to the App Store</div>
+
+    <nav class="links">
+      <a class="primary" href="mailto:support@exerciz.app">Contact</a>
+      <a class="ghost" href="support.html">Support</a>
+      <a class="ghost" href="privacy.html">Privacy</a>
+    </nav>
+
+    <p class="footer">
+      © 2026 Exerciz · <a href="https://exerciz.app">exerciz.app</a>
+    </p>
+  </main>
+</body>
+</html>
