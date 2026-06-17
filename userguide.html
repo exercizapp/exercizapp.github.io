@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>User Guide — Exerciz</title>
+<meta name="description" content="The complete Exerciz user guide: build routines, generate workouts with AI, run guided sessions with an on-screen instructor, browse the community, and track every workout. Works on phone or computer." />
+<link rel="icon" href="icon.png" />
+<meta property="og:title" content="Exerciz — User Guide" />
+<meta property="og:description" content="Everything you can do in Exerciz, including the AI routine generator." />
+<meta property="og:image" content="icon.png" />
+<style>
+  :root{
+    --ink:#0A0A0A; --soft:#5A5A5A; --mut:#8A8A8A; --line:#E2E2E2;
+    --n50:#FAFAFA; --n100:#F0F0F0; --bg:#FFFFFF; --accent:#E8806B; --accent-soft:#FBEAE5;
+    --sidebar:264px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--ink); line-height:1.6;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--ink);}
+  img{max-width:100%;}
+
+  /* ---------- Layout ---------- */
+  .layout{display:flex; align-items:flex-start;}
+
+  /* ---------- Sidebar ---------- */
+  .sidebar{
+    width:var(--sidebar); flex:0 0 var(--sidebar);
+    position:sticky; top:0; height:100vh; overflow-y:auto;
+    border-right:1px solid var(--line); padding:26px 18px 40px; background:var(--bg);
+  }
+  .brand{display:flex; align-items:center; gap:12px; margin:0 6px 22px; text-decoration:none; color:var(--ink);}
+  .brand img{width:42px; height:42px; border-radius:11px; border:1px solid var(--n100);}
+  .brand .name{font-size:20px; font-weight:800; letter-spacing:-0.02em;}
+  .brand .sub{font-size:11px; font-weight:700; letter-spacing:0.09em; text-transform:uppercase; color:var(--soft); margin-top:1px;}
+
+  .nav-eyebrow{font-size:10px; font-weight:800; letter-spacing:0.11em; text-transform:uppercase; color:var(--mut); margin:18px 12px 6px;}
+  nav.toc a{
+    display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--soft);
+    font-size:14.5px; font-weight:600; padding:8px 12px; border-radius:9px; line-height:1.3;
+    transition:background .15s ease,color .15s ease;
+  }
+  nav.toc a .ix{font-size:11px; font-weight:700; color:var(--mut); min-width:16px;}
+  nav.toc a:hover{background:var(--n50); color:var(--ink);}
+  nav.toc a.active{background:var(--ink); color:#fff;}
+  nav.toc a.active .ix{color:rgba(255,255,255,.55);}
+  nav.toc a .star{color:var(--accent); font-size:12px;}
+  nav.toc a.active .star{color:#fff;}
+
+  .side-foot{margin:24px 12px 0; padding-top:18px; border-top:1px solid var(--line); font-size:12.5px; color:var(--mut);}
+  .side-foot a{color:var(--soft); text-decoration:none;}
+  .side-foot a:hover{text-decoration:underline;}
+
+  /* ---------- Mobile top bar ---------- */
+  .topbar{
+    display:none; position:sticky; top:0; z-index:40; align-items:center; gap:12px;
+    padding:12px 16px; background:rgba(255,255,255,.92); backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .topbar img{width:30px; height:30px; border-radius:8px; border:1px solid var(--n100);}
+  .topbar .t-name{font-weight:800; font-size:16px; letter-spacing:-0.01em;}
+  .topbar .t-name span{font-weight:600; color:var(--soft);}
+  .menu-btn{
+    margin-left:auto; appearance:none; border:1px solid var(--line); background:#fff; border-radius:9px;
+    width:42px; height:38px; display:flex; align-items:center; justify-content:center; cursor:pointer;
+  }
+  .menu-btn span,.menu-btn span::before,.menu-btn span::after{
+    content:""; display:block; width:18px; height:2px; background:var(--ink); position:relative; border-radius:2px;
+  }
+  .menu-btn span::before{position:absolute; top:-6px;}
+  .menu-btn span::after{position:absolute; top:6px;}
+  .scrim{display:none; position:fixed; inset:0; background:rgba(10,10,10,.4); z-index:45;}
+
+  /* ---------- Content ---------- */
+  main{flex:1 1 auto; min-width:0; max-width:860px; margin:0 auto; padding:0 30px 120px;}
+  section{scroll-margin-top:24px; padding-top:54px;}
+  section:first-of-type{padding-top:40px;}
+
+  .eyebrow{font-size:11px; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent); margin:0 0 8px;}
+  h1{font-size:42px; line-height:1.08; font-weight:800; letter-spacing:-0.03em; margin:0 0 14px;}
+  h2{font-size:27px; font-weight:800; letter-spacing:-0.02em; margin:0 0 8px;}
+  h3{font-size:17px; font-weight:700; margin:26px 0 6px;}
+  p{font-size:16px; color:#1b1b1b; margin:0 0 14px;}
+  .lead{font-size:18.5px; color:var(--soft); line-height:1.55; margin:0 0 22px;}
+  strong{font-weight:700;}
+  hr{border:none; border-top:1px solid var(--line); margin:0;}
+
+  .pill{display:inline-block; font-size:11px; font-weight:800; letter-spacing:0.07em; text-transform:uppercase;
+    color:var(--accent); background:var(--accent-soft); border-radius:999px; padding:5px 12px;}
+  .pill.dark{color:#fff; background:var(--ink);}
+
+  /* hero */
+  .hero{padding-top:8px;}
+  .hero-badges{display:flex; gap:8px; flex-wrap:wrap; margin:18px 0 6px;}
+  .hero-badges .b{font-size:13px; font-weight:600; color:var(--soft); border:1px solid var(--line); border-radius:999px; padding:7px 14px;}
+
+  /* two-column: text + phone */
+  .split{display:grid; grid-template-columns:1fr 250px; gap:34px; align-items:start; margin:22px 0 6px;}
+  .split.rev{grid-template-columns:250px 1fr;}
+  .split .copy p:last-child{margin-bottom:0;}
+
+  /* phone frame */
+  .phone{width:250px; margin:0 auto; border:9px solid var(--ink); border-radius:40px; overflow:hidden;
+    background:var(--ink); box-shadow:0 18px 50px rgba(10,10,10,.16); position:relative;}
+  .phone::before{content:""; position:absolute; top:9px; left:50%; transform:translateX(-50%);
+    width:96px; height:22px; background:var(--ink); border-radius:0 0 14px 14px; z-index:2;}
+  .phone img{display:block; width:100%; border-radius:31px;}
+  figure{margin:0;}
+  figcaption{font-size:13px; color:var(--mut); text-align:center; margin-top:10px; line-height:1.45;}
+
+  /* gallery row of phones */
+  .gallery{display:grid; grid-template-columns:repeat(2,1fr); gap:26px; margin:22px 0 6px;}
+  .gallery .phone{width:100%; max-width:230px;}
+
+  /* feature cards */
+  .cards{display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin:18px 0 6px;}
+  .card{border:1px solid var(--line); border-radius:14px; padding:18px 20px; background:#fff;}
+  .card .ic{font-size:20px; line-height:1; margin-bottom:8px;}
+  .card h4{margin:0 0 4px; font-size:15.5px; font-weight:700;}
+  .card p{margin:0; font-size:14px; color:var(--soft); line-height:1.5;}
+
+  /* steps */
+  ol.steps{counter-reset:s; list-style:none; padding:0; margin:16px 0;}
+  ol.steps li{position:relative; padding:0 0 16px 44px; margin:0;}
+  ol.steps li::before{counter-increment:s; content:counter(s); position:absolute; left:0; top:-2px;
+    width:30px; height:30px; border-radius:999px; background:var(--ink); color:#fff;
+    font-size:14px; font-weight:700; display:flex; align-items:center; justify-content:center;}
+  ol.steps li:not(:last-child)::after{content:""; position:absolute; left:14px; top:30px; bottom:2px; width:2px; background:var(--n100);}
+  ol.steps li strong{display:block; margin-bottom:1px;}
+  ol.steps li p{font-size:15px; color:var(--soft); margin:0;}
+
+  ul.ticks{list-style:none; padding:0; margin:14px 0;}
+  ul.ticks li{position:relative; padding:5px 0 5px 28px; font-size:15.5px; color:#1b1b1b;}
+  ul.ticks li::before{content:"✓"; position:absolute; left:0; top:5px; color:var(--accent); font-weight:800;}
+
+  /* callout */
+  .note{border:1px solid var(--line); border-left:3px solid var(--accent); background:var(--n50);
+    border-radius:10px; padding:14px 18px; margin:18px 0; font-size:15px; color:#1b1b1b;}
+  .note strong{color:var(--ink);}
+
+  /* AI highlight block */
+  .ai-band{background:var(--ink); color:#fff; border-radius:18px; padding:30px 30px 8px; margin:18px 0 6px;}
+  .ai-band h2,.ai-band h3{color:#fff;}
+  .ai-band p{color:rgba(255,255,255,.78);}
+  .ai-band .eyebrow{color:var(--accent);}
+  .ai-band .split{align-items:center;}
+  .ai-band .signal{display:flex; gap:10px; padding:11px 0; border-top:1px solid rgba(255,255,255,.12); font-size:14.5px;}
+  .ai-band .signal:first-of-type{border-top:none;}
+  .ai-band .signal b{color:#fff;} .ai-band .signal span{color:rgba(255,255,255,.62);}
+  .ai-band .phone{box-shadow:0 18px 50px rgba(0,0,0,.4);}
+
+  /* faq */
+  .faq{border-top:1px solid var(--line);}
+  details{border-bottom:1px solid var(--line); padding:4px 0;}
+  details summary{cursor:pointer; list-style:none; padding:15px 30px 15px 2px; font-weight:700; font-size:16px; position:relative;}
+  details summary::-webkit-details-marker{display:none;}
+  details summary::after{content:"+"; position:absolute; right:6px; top:13px; font-size:22px; font-weight:400; color:var(--mut);}
+  details[open] summary::after{content:"–";}
+  details p{padding:0 2px 14px; margin:0; color:#333;}
+
+  .endcard{border:1px solid var(--line); border-radius:16px; padding:28px; text-align:center; margin-top:26px;}
+  .endcard h3{margin:0 0 6px;}
+  .btn-row{display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:16px;}
+  .btn{text-decoration:none; font-size:14.5px; font-weight:700; padding:12px 24px; border-radius:999px;}
+  .btn.primary{background:var(--ink); color:#fff;}
+  .btn.ghost{border:1px solid var(--line); color:var(--ink);}
+  .btn:hover{opacity:.85;}
+
+  .page-foot{margin-top:50px; padding-top:22px; border-top:1px solid var(--line); color:var(--mut); font-size:13px;}
+  .page-foot a{color:var(--soft);}
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:880px){
+    .sidebar{position:fixed; top:0; left:0; z-index:50; height:100vh; transform:translateX(-100%);
+      transition:transform .22s ease; box-shadow:0 0 40px rgba(10,10,10,.18);}
+    body.nav-open .sidebar{transform:translateX(0);}
+    body.nav-open .scrim{display:block;}
+    .topbar{display:flex;}
+    main{padding:0 18px 100px;}
+    .split,.split.rev{grid-template-columns:1fr; gap:18px;}
+    .split .phone,.split.rev .phone{order:-1;}
+    h1{font-size:34px;}
+    h2{font-size:23px;}
+  }
+  @media (max-width:520px){
+    .cards{grid-template-columns:1fr;}
+    .gallery{grid-template-columns:1fr 1fr; gap:16px;}
+    .ai-band{padding:24px 20px 6px;}
+  }
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;} .sidebar{transition:none;}}
+</style>
+</head>
+<body>
+
+<!-- Mobile top bar -->
+<div class="topbar">
+  <img src="icon.png" alt="Exerciz icon" />
+  <div class="t-name">Exerciz <span>· Guide</span></div>
+  <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-controls="sidebar" aria-expanded="false"><span></span></button>
+</div>
+<div class="scrim" id="scrim"></div>
+
+<div class="layout">
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="https://exercizapp.github.io/">
+      <img src="icon.png" alt="Exerciz app icon" />
+      <span>
+        <span class="name">Exerciz</span>
+        <span class="sub" style="display:block">User Guide</span>
+      </span>
+    </a>
+    <div class="nav-eyebrow">Contents</div>
+    <nav class="toc" id="toc">
+      <a href="#overview"><span class="ix">01</span> Overview</a>
+      <a href="#start"><span class="ix">02</span> Getting started</a>
+      <a href="#home"><span class="ix">03</span> The home dashboard</a>
+      <a href="#routines"><span class="ix">04</span> Building a routine</a>
+      <a href="#ai"><span class="ix">05</span> AI routine generator <span class="star">★</span></a>
+      <a href="#community"><span class="ix">06</span> Community workouts</a>
+      <a href="#run"><span class="ix">07</span> Running a workout</a>
+      <a href="#library"><span class="ix">08</span> Exercises &amp; media</a>
+      <a href="#history"><span class="ix">09</span> History &amp; stats</a>
+      <a href="#profile"><span class="ix">10</span> Profile &amp; settings</a>
+      <a href="#faq"><span class="ix">11</span> Tips &amp; FAQ</a>
+      <a href="#support"><span class="ix">12</span> Support</a>
+    </nav>
+    <div class="side-foot">
+      <a href="https://exercizapp.github.io/">← Back to home</a><br/>
+      <a href="support.html">Support</a> · <a href="privacy.html">Privacy</a>
+    </div>
+  </aside>
+
+  <!-- Main content -->
+  <main>
+
+    <!-- 01 Overview -->
+    <section id="overview" class="hero">
+      <p class="eyebrow">Exerciz · iOS workout app</p>
+      <h1>Build your routine.<br/>Run guided workouts.</h1>
+      <p class="lead">Exerciz is a custom workout-routine builder for iPhone. Target the muscle groups
+      you want with bodyweight, free weights, or equipment — then run guided, timed sessions with an
+      on-screen instructor and keep every streak, minute, and session in one place. This guide walks
+      through everything the app can do, including the <strong>AI routine generator</strong>.</p>
+      <div class="hero-badges">
+        <span class="b">📱 iPhone · iOS</span>
+        <span class="b">🔒 Sign in with phone &amp; a code</span>
+        <span class="b">✦ AI-built routines</span>
+        <span class="b">🎬 On-screen instructor</span>
+      </div>
+      <div class="cards" style="margin-top:26px">
+        <div class="card"><div class="ic">🏗️</div><h4>Create routines</h4><p>Pick exercises, set sets, duration and rest, and schedule them across your week.</p></div>
+        <div class="card"><div class="ic">✦</div><h4>Generate with AI</h4><p>Describe what you want and Exerciz builds a tailored session from your profile and history.</p></div>
+        <div class="card"><div class="ic">▶️</div><h4>Run guided sessions</h4><p>A looping instructor demo, a self-camera tile, set timers and automatic rest periods.</p></div>
+        <div class="card"><div class="ic">📈</div><h4>Track everything</h4><p>Streaks, minutes, calories and a 30-day activity heatmap — logged automatically.</p></div>
+      </div>
+      <div class="note" style="margin-top:24px">
+        <strong>New here?</strong> Read straight through, or jump to a section from the menu on the
+        left. On a phone, tap the <strong>☰</strong> button at the top to open the menu.
+      </div>
+    </section>
+
+    <!-- 02 Getting started -->
+    <section id="start">
+      <p class="eyebrow">Getting started</p>
+      <h2>Sign in and set up your profile</h2>
+      <div class="split">
+        <div class="copy">
+          <p>Exerciz uses a <strong>one-time code</strong> instead of a password. Enter your phone
+          number, type the code we text you, and you're in — there's nothing to remember.</p>
+          <ol class="steps">
+            <li><strong>Enter your phone number</strong><p>Pick your country code and type your number.</p></li>
+            <li><strong>Type the verification code</strong><p>We send a one-time code by text. Didn't get it? Tap <em>Resend</em>.</p></li>
+            <li><strong>Tell us about you</strong><p>Name (optional), body model, age range, fitness level, and a weekly goal.</p></li>
+            <li><strong>Pick your instructor</strong><p>Choose Marcus or Nadia to guide your sessions — you can change this any time.</p></li>
+          </ol>
+          <p>Once you're set up, you land on the <strong>Home</strong> tab. The bar along the bottom of
+          the app switches between <strong>Home</strong>, <strong>Workouts</strong>, and
+          <strong>Profile</strong>.</p>
+        </div>
+        <figure>
+          <div class="phone"><img src="assets/guide/profile.jpg" loading="lazy" alt="Profile and instructor setup" /></div>
+          <figcaption>Your profile — instructor, units and preferences live here.</figcaption>
+        </figure>
+      </div>
+      <div class="note"><strong>Your onboarding answers do real work.</strong> Your fitness level,
+      goal and body model feed straight into the AI generator and the exercise recommendations you'll
+      see later.</div>
+    </section>
+
+    <!-- 03 Home -->
+    <section id="home">
+      <p class="eyebrow">The home dashboard</p>
+      <h2>Everything at a glance</h2>
+      <p class="lead">Home opens on a clean editorial layout that puts today's plan and your recent
+      progress front and center.</p>
+      <div class="gallery">
+        <figure>
+          <div class="phone"><img src="assets/guide/home-hero.jpg" loading="lazy" alt="Home hero with focus chart and today's workout" /></div>
+          <figcaption>Focus over the last 30 days, the week ahead, and today's session.</figcaption>
+        </figure>
+        <figure>
+          <div class="phone"><img src="assets/guide/home-stats.jpg" loading="lazy" alt="Home stats, streak heatmap and explore exercises" /></div>
+          <figcaption>Totals, your streak heatmap, and exercises to explore.</figcaption>
+        </figure>
+      </div>
+      <div class="cards">
+        <div class="card"><div class="ic">🎯</div><h4>Focus breakdown</h4><p>A 30-day ring shows how your training splits across muscle groups, so you can see what you've been hitting.</p></div>
+        <div class="card"><div class="ic">🗓️</div><h4>Week ahead</h4><p>The days you've scheduled routines for are marked, so you always know what's coming.</p></div>
+        <div class="card"><div class="ic">✅</div><h4>Today's session</h4><p>Your next scheduled routine sits up top with a one-tap start — or a "nailed it" card once it's done.</p></div>
+        <div class="card"><div class="ic">🔥</div><h4>Streak &amp; totals</h4><p>Workouts, minutes and calories, plus a calendar heatmap of your last few weeks of activity.</p></div>
+      </div>
+      <p>From the bar at the bottom of Home you can also start a <strong>+ New routine</strong> three
+      ways — build your own, generate one with <strong>AI</strong>, or pull one from the
+      <strong>community</strong>. More on each below.</p>
+    </section>
+
+    <!-- 04 Routines -->
+    <section id="routines">
+      <p class="eyebrow">Building a routine</p>
+      <h2>Make a workout that's yours</h2>
+      <div class="split rev">
+        <figure>
+          <div class="phone"><img src="assets/guide/new-routine.jpg" loading="lazy" alt="New routine sheet with three options" /></div>
+          <figcaption>Three ways to start a new routine.</figcaption>
+        </figure>
+        <div class="copy">
+          <p>Tap <strong>Add</strong> on the Workouts tab (or <strong>+ New routine</strong> on Home).
+          You'll choose how to start:</p>
+          <ul class="ticks">
+            <li><strong>Create my own</strong> — hand-pick every exercise.</li>
+            <li><strong>Create with AI</strong> — describe a session and let Exerciz build it.</li>
+            <li><strong>Community workouts</strong> — start from a routine someone else shared.</li>
+          </ul>
+          <p>When you build your own, add exercises from the library and tune each one — how many
+          <strong>sets</strong>, the <strong>duration</strong> of each set, and the <strong>rest</strong>
+          in between.</p>
+        </div>
+      </div>
+
+      <h3>Schedule it, warm up, and reorder</h3>
+      <div class="split">
+        <div class="copy">
+          <p>Open a routine's editor to set when and how it runs:</p>
+          <ul class="ticks">
+            <li><strong>Repeat weekly</strong> on the days you choose (M–Su), or pick <strong>specific dates</strong>.</li>
+            <li>Set a <strong>time of day</strong> so it shows up under "today" when it's due.</li>
+            <li>Add a <strong>warm-up</strong> before the main work and a <strong>cool-down</strong> after.</li>
+            <li><strong>Drag to reorder</strong> exercises, or swipe to remove them.</li>
+            <li>Set how many times the circuit <strong>repeats</strong>.</li>
+          </ul>
+          <p>Everything saves to your account automatically, so your routines follow you to any device
+          you sign in on.</p>
+        </div>
+        <figure>
+          <div class="phone"><img src="assets/guide/edit-routine.jpg" loading="lazy" alt="Edit routine with schedule, warm-up and reorder" /></div>
+          <figcaption>Schedule, warm-up, and drag-to-reorder in the routine editor.</figcaption>
+        </figure>
+      </div>
+
+      <h3>Preview before you start</h3>
+      <div class="split rev">
+        <figure>
+          <div class="phone"><img src="assets/guide/routine-preview.jpg" loading="lazy" alt="Routine preview with exercises and start button" /></div>
+          <figcaption>The preview shows the full plan, estimated time and calories.</figcaption>
+        </figure>
+        <div class="copy">
+          <p>Every routine has a preview with its schedule, an estimate of <strong>time</strong> and
+          <strong>calories</strong>, and the full list of exercises with sets, duration and rest.</p>
+          <p>From here, tap <strong>Start Workout</strong> to begin a guided session — or
+          <strong>Invite partner</strong> to train alongside a friend.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 AI -->
+    <section id="ai">
+      <div class="ai-band">
+        <p class="eyebrow">★ AI routine generator</p>
+        <h2>Describe it. Get a tailored session.</h2>
+        <div class="split">
+          <div class="copy">
+            <p>Tap <strong>Create with AI</strong> and tell Exerciz what you're after — something like
+            <em>"quick legs day, sore from yesterday, focus on glutes."</em> Exerciz combines your
+            request with your fitness profile and recent history to build a session that fits.</p>
+            <h3 style="margin-top:18px">What you control</h3>
+            <div class="signal"><b>Focus</b>&nbsp;<span>— Mixed, Strength, Cardio, Mobility or Full Body</span></div>
+            <div class="signal"><b>Time available</b>&nbsp;<span>— a slider sets the session length</span></div>
+            <div class="signal"><b>Favorites only</b>&nbsp;<span>— build from exercises you've hearted</span></div>
+            <div class="signal"><b>My uploads only</b>&nbsp;<span>— use exercises you've recorded yourself</span></div>
+          </div>
+          <figure>
+            <div class="phone"><img src="assets/guide/ai-create.jpg" loading="lazy" alt="Create with AI screen with signals and generate button" /></div>
+          </figure>
+        </div>
+        <h3>Signals the AI uses</h3>
+        <p>Below your request, Exerciz shows the <strong>signals</strong> it will factor in — tap any
+        one to adjust or remove it before generating:</p>
+        <div class="signal"><b>Under-worked muscles&nbsp;</b><span>— groups your recent sessions have skipped, pulled from your history</span></div>
+        <div class="signal"><b>Fitness level&nbsp;</b><span>— from your profile, so the difficulty matches you</span></div>
+        <div class="signal"><b>Equipment&nbsp;</b><span>— bodyweight, free weights or machines you have access to</span></div>
+        <p style="margin-top:14px">Tap <strong>Generate routine</strong> and Exerciz assembles the
+        workout. Don't like it? Tweak a signal and generate again. Save it and it lands in
+        <strong>My Workouts</strong> with an <strong>✦ AI</strong> badge so you always know how it was made.</p>
+        <p style="padding-bottom:22px"><span class="pill">Heads up</span>&nbsp; The free plan includes a
+        set number of AI generations (the screen shows how many you've used, e.g. <em>"0 of 10 free
+        generations used"</em>).</p>
+      </div>
+      <div class="split rev">
+        <figure>
+          <div class="phone"><img src="assets/guide/my-workouts.jpg" loading="lazy" alt="My Workouts list with an AI-badged routine" /></div>
+          <figcaption>Saved routines show an <strong>✦</strong> badge when AI built them.</figcaption>
+        </figure>
+        <div class="copy">
+          <ul class="ticks">
+            <li>AI routines are fully editable — treat them as a starting point and adjust anything.</li>
+            <li>The more you train, the smarter the "under-worked muscles" signal gets.</li>
+            <li>Hearting exercises you love makes <strong>Favorites only</strong> generations sharper.</li>
+            <li>Generated sessions sit alongside your hand-built ones in <strong>My Workouts</strong>.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 Community -->
+    <section id="community">
+      <p class="eyebrow">Community workouts</p>
+      <h2>Start from what others built</h2>
+      <div class="split rev">
+        <figure>
+          <div class="phone"><img src="assets/guide/new-routine.jpg" loading="lazy" alt="Community workouts list" /></div>
+          <figcaption>Browse community routines with focus, length and calorie estimates.</figcaption>
+        </figure>
+        <div class="copy">
+          <p>The <strong>Community</strong> list is full of routines shared by other people using
+          Exerciz — things like <em>20-Min HIIT Burner</em>, <em>Core Crusher</em>, or
+          <em>Push Day Classic</em>.</p>
+          <ul class="ticks">
+            <li>Each card shows the <strong>focus</strong> (cardio, core, upper body…), number of exercises, estimated <strong>time</strong> and <strong>calories</strong>.</li>
+            <li><strong>Download</strong> a routine to add it to your own Workouts, then tweak it however you like.</li>
+            <li><strong>Share your own:</strong> when you're proud of a routine, mark it shared and it appears here for others.</li>
+          </ul>
+          <p>Your private routines and history are never shared unless you explicitly choose to share a
+          routine.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 Run -->
+    <section id="run">
+      <p class="eyebrow">Running a workout</p>
+      <h2>Guided, hands-free sessions</h2>
+      <p class="lead">Press <strong>Start Workout</strong> and Exerciz takes over the clock — looping a
+      demo, counting your sets, and sliding into rest automatically so you can focus on moving.</p>
+      <div class="gallery">
+        <figure>
+          <div class="phone"><img src="assets/guide/run-session.jpg" loading="lazy" alt="Guided session with instructor demo and timer" /></div>
+          <figcaption>The work screen — looping instructor demo, set counter and timer.</figcaption>
+        </figure>
+        <figure>
+          <div class="phone"><img src="assets/guide/rest-screen.jpg" loading="lazy" alt="Full-screen rest timer with up next" /></div>
+          <figcaption>Rest counts down full-screen and tells you what's up next.</figcaption>
+        </figure>
+      </div>
+      <div class="cards">
+        <div class="card"><div class="ic">🎬</div><h4>Instructor demo</h4><p>A seamless looping video of your chosen instructor performing the exercise, with the worked muscles highlighted.</p></div>
+        <div class="card"><div class="ic">🤳</div><h4>Self-camera tile</h4><p>Turn on the front camera to watch your own form next to the demo. Tap the camera icon to toggle it.</p></div>
+        <div class="card"><div class="ic">⏱️</div><h4>Set &amp; rest timers</h4><p>Each set is timed; rest periods count down full-screen and show the next exercise and set.</p></div>
+        <div class="card"><div class="ic">🔊</div><h4>Audio cues</h4><p>Optional sounds mark the change between sets so you can keep your eyes off the screen.</p></div>
+        <div class="card"><div class="ic">⏭️</div><h4>Skip &amp; exit</h4><p>Skip a rest when you're ready, or exit early — finished sessions log to your history automatically.</p></div>
+        <div class="card"><div class="ic">🤝</div><h4>Partner workouts</h4><p>Invite a friend from the routine preview to train the same session together.</p></div>
+      </div>
+      <div class="note"><strong>It just works offline-friendly.</strong> Demo videos download the first
+      time you play them and are cached on your device, so repeat sessions start instantly.</div>
+    </section>
+
+    <!-- 08 Library -->
+    <section id="library">
+      <p class="eyebrow">Exercises &amp; media</p>
+      <h2>A growing library — plus your own</h2>
+      <div class="split">
+        <div class="copy">
+          <p>Exerciz ships with a library spanning <strong>yoga</strong>, <strong>bodyweight</strong>,
+          <strong>free weights</strong> and <strong>equipment</strong>. Browse exercises from Home
+          ("Explore exercises") or while building a routine, and <strong>heart</strong> the ones you
+          love so they're easy to find — and so the AI can prioritise them.</p>
+          <h3>Always something to show</h3>
+          <p>Every exercise does its best to show you the movement: a <strong>video demo</strong> when
+          one exists, a clear <strong>still image</strong> if not, and otherwise a written
+          <strong>description with step-by-step instructions</strong> — so you're never left guessing.</p>
+          <h3>Add your own</h3>
+          <p>Record a <strong>custom exercise</strong> with your camera and drop it into any routine.
+          Your recordings stay on your device unless you choose to share a routine that uses them.</p>
+        </div>
+        <figure>
+          <div class="phone"><img src="assets/guide/home-stats.jpg" loading="lazy" alt="Explore exercises on the home screen" /></div>
+          <figcaption>"Explore exercises" surfaces moves you can add or heart.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- 09 History -->
+    <section id="history">
+      <p class="eyebrow">History &amp; stats</p>
+      <h2>Watch the work add up</h2>
+      <div class="split rev">
+        <figure>
+          <div class="phone"><img src="assets/guide/home-stats.jpg" loading="lazy" alt="Stats and streak heatmap" /></div>
+          <figcaption>Totals and a calendar heatmap of recent activity.</figcaption>
+        </figure>
+        <div class="copy">
+          <p>Finish a session and it's <strong>logged automatically</strong> — no manual entry. Your
+          dashboard keeps a running tally:</p>
+          <ul class="ticks">
+            <li><strong>Workouts, minutes and calories</strong> totals.</li>
+            <li>A <strong>streak</strong> counter to keep your momentum going.</li>
+            <li>A <strong>30-day heatmap</strong> — darker squares are bigger days.</li>
+            <li>The <strong>focus ring</strong> on Home showing your muscle-group split.</li>
+          </ul>
+          <p>Tap <strong>View full history</strong> to see every past session in a list.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 Profile -->
+    <section id="profile">
+      <p class="eyebrow">Profile &amp; settings</p>
+      <h2>Make it feel like yours</h2>
+      <div class="split">
+        <div class="copy">
+          <p>The <strong>Profile</strong> tab is your control center:</p>
+          <ul class="ticks">
+            <li><strong>Instructor</strong> — switch between Marcus and Nadia any time.</li>
+            <li><strong>Units</strong> — show weights in <strong>kg</strong> or <strong>lb</strong>.</li>
+            <li><strong>Sound on set change</strong> — toggle the audio cue during sessions.</li>
+            <li><strong>Notifications</strong> — reminders for your scheduled routines.</li>
+            <li><strong>Music</strong> — connect a playlist so your soundtrack runs with your workout.</li>
+            <li><strong>Send feedback</strong> — tell us what you'd like to see.</li>
+            <li><strong>Sign out</strong> — and the app version is shown at the bottom.</li>
+          </ul>
+        </div>
+        <figure>
+          <div class="phone"><img src="assets/guide/profile.jpg" loading="lazy" alt="Profile preferences and instructor picker" /></div>
+          <figcaption>Preferences, units, and the instructor picker.</figcaption>
+        </figure>
+      </div>
+      <div class="note"><strong>Deleting your account</strong> is also on the Profile tab. It
+      permanently removes your profile, routines, history and custom exercises — this can't be undone.</div>
+    </section>
+
+    <!-- 11 FAQ -->
+    <section id="faq">
+      <p class="eyebrow">Tips &amp; FAQ</p>
+      <h2>Good to know</h2>
+      <div class="faq">
+        <details open>
+          <summary>How do I sign in — is there a password?</summary>
+          <p>No password. Enter your phone number and type the one-time code we text you. If it doesn't
+          arrive, double-check the number and tap <em>Resend</em>.</p>
+        </details>
+        <details>
+          <summary>How many AI routines can I generate?</summary>
+          <p>The free plan includes a set number of generations. The Create-with-AI screen shows your
+          remaining count (for example, "0 of 10 free generations used").</p>
+        </details>
+        <details>
+          <summary>Can I edit a routine the AI made?</summary>
+          <p>Absolutely. AI routines save into My Workouts just like any other — reorder exercises,
+          change sets and rest, add a warm-up, or reschedule it. The ✦ AI badge just marks how it started.</p>
+        </details>
+        <details>
+          <summary>What if an exercise has no video?</summary>
+          <p>Exerciz falls back gracefully: it shows a still image if there's no video, and a written
+          description with step-by-step instructions if there's no image — so you always know the move.</p>
+        </details>
+        <details>
+          <summary>Do my workouts sync across devices?</summary>
+          <p>Yes. Your profile, routines and history are tied to your account, so signing in on another
+          device brings them along. Large custom recordings stay on the device they were made on.</p>
+        </details>
+        <details>
+          <summary>Is my data private?</summary>
+          <p>Your routines, profile and history are private to your account. Nothing is shared with the
+          community unless you explicitly choose to share a routine. See the
+          <a href="privacy.html">Privacy Policy</a> for details.</p>
+        </details>
+        <details>
+          <summary>The app isn't behaving — what should I do?</summary>
+          <p>Close and reopen the app and make sure you're on the latest version. If it persists, email
+          <a href="mailto:support@exerciz.app">support@exerciz.app</a> with your device model, iOS
+          version and a short description (a screenshot helps).</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- 12 Support -->
+    <section id="support">
+      <p class="eyebrow">Support</p>
+      <h2>We're here to help</h2>
+      <p>Questions, bug reports or ideas? We usually reply within 1–2 business days.</p>
+      <div class="endcard">
+        <span class="pill dark">Get in touch</span>
+        <h3 style="margin-top:14px">support@exerciz.app</h3>
+        <p style="color:var(--soft)">Or browse the full support page and privacy policy.</p>
+        <div class="btn-row">
+          <a class="btn primary" href="mailto:support@exerciz.app">Email support</a>
+          <a class="btn ghost" href="support.html">Support page</a>
+          <a class="btn ghost" href="https://exercizapp.github.io/">Back to home</a>
+        </div>
+      </div>
+      <p class="page-foot">© 2026 Exerciz · <a href="https://exercizapp.github.io/">exercizapp.github.io</a>
+      · <a href="privacy.html">Privacy</a> · <a href="support.html">Support</a></p>
+    </section>
+
+  </main>
+</div>
+
+<script>
+  // Mobile drawer
+  var body = document.body, btn = document.getElementById('menuBtn'),
+      scrim = document.getElementById('scrim');
+  function setNav(open){
+    body.classList.toggle('nav-open', open);
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+  btn.addEventListener('click', function(){ setNav(!body.classList.contains('nav-open')); });
+  scrim.addEventListener('click', function(){ setNav(false); });
+
+  // Close drawer after picking a link (mobile)
+  var links = document.querySelectorAll('#toc a');
+  links.forEach(function(a){
+    a.addEventListener('click', function(){
+      if (window.matchMedia('(max-width:880px)').matches) setNav(false);
+    });
+  });
+
+  // Scrollspy — highlight the section in view
+  var sections = document.querySelectorAll('main section');
+  var byId = {};
+  links.forEach(function(a){ byId[a.getAttribute('href').slice(1)] = a; });
+  var spy = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting){
+        links.forEach(function(a){ a.classList.remove('active'); });
+        var a = byId[e.target.id];
+        if (a){ a.classList.add('active'); }
+      }
+    });
+  }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+  sections.forEach(function(s){ spy.observe(s); });
+</script>
+</body>
+</html>
